@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+
+{% block contenido1 %}
+<p>Tickets</p>
+
+{% endblock %}
+
+
+{% block contenido %}
+                        <!-- COMIENZO DEL SECTOR DE TARJETAS DE CANTIDAD-->
+
+
+<main class="container-body">
+  <div id="contenido" class="pages-container-fluid pt-2 pb-2 pl-5 pr-5">
+    <div class="col-12 col-xl-12 mb-4 align-items-stretch">
+      <!-- Mensaje de bienvenida con el nombre del usuario o "invitado" si no está logueado -->
+      <h4>Bienvenido, {% if user.is_authenticated %}{{ user.username }}{% else %}invitado{% endif %}!</h4>
+      
+      <!-- Información de la tarjeta -->
+      <div class="card">
+        <h5 class="card-header">Dinero disponible</h5>
+        <div class="card-body">
+          <h5 class="card-title">$ 1.450.098,00</h5>
+          
+          <!-- Botones para acciones -->
+          <!--<button type="button" class="btn btn-light">Ingresar Dinero</button>
+          <button type="button" class="btn btn-light" onclick="window.location.href='#' %}'">Transferir Dinero</button>-->
+          <a class="btn btn-light" href="#" role="button">Ingresar Dinero</a>
+          <a class="btn btn-light" href="#" role="button">Transferir Dinero</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+
+
+                        <!-- COMIENZO DEL SECTOR DE TABLA DE TICKETS  -->
+
+
+
+
+            <div id="contenido"  class="pages-container-fluid pt-2 pb-2 pl-5 pr-5">
+
+                <div class="col-12 col-xl-12 mb-4 align-items-stretch">
+                    <div class="card h-100 border-0 rounded">
+                        <div class="card-title mb-1">
+                            
+                             {% if tipo == 1 %} 
+
+                            <p  class="card-cant-label text-center text-dark m-0 p-1"><strong>TODOS</strong></p>
+                            </div>
+                            <div id=card-body-tod class="card-body-table">
+                            {% endif %}
+                             {% if tipo == 2 %} 
+
+                            <p  class="card-cant-label text-center text-dark m-0 p-1"><strong>SIN ASIGNAR</strong></p>
+                            </div>
+                            <div id=card-body-sin class="card-body-table">
+                            {% endif %}
+                             {% if tipo == 3 %} 
+
+                            <p  class="card-cant-label text-center text-dark m-0 p-1"><strong>EN PROCESO</strong></p>
+                            </div>
+                            <div id=card-body-enp class="card-body-table">
+                            {% endif %}
+                             {% if tipo == 4 %} 
+
+                            <p class="card-cant-label text-center text-dark m-0 p-1"><strong>CERRADOS</strong></p>
+                            </div>
+                            <div id=card-body-cer class="card-body-table">
+                            {% endif %}
+
+                        
+                        
+                            <div class="table-responsive-md">
+                                <div _ngcontent-c4="" class="table-responsive">
+                                    <table _ngcontent-c4="" class="table ">
+                                        <thead _ngcontent-c4="">
+                                            <tr _ngcontent-c4="">
+                                                <th _ngcontent-c4="" style="width:5%;">N°</th>
+                                                <th _ngcontent-c4="" style="width:16%;">Fecha</th>
+                                                <th _ngcontent-c4="" style="width:20%;">Usuario</th>
+                                                <th _ngcontent-c4="" style="width:10%;">Responsable</th>
+                                                <th _ngcontent-c4="" style="width:15%;">Estado</th>
+                                                <th _ngcontent-c4="" style="width:25%;">Titulo</th>
+                                                <th _ngcontent-c4="" class="actions" style="width:3%;"></th>
+                                                <th _ngcontent-c4="" class="actions" style="width:3%;"></th>
+                                                <th _ngcontent-c4="" class="actions" style="width:3%;"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody _ngcontent-c4="" class="no-border-x">
+                                            {% for p in solicitudes %} 
+                                                    <tr _ngcontent-c4="">
+                                                        <td>{{p.id}}</td>
+                                                        <td >{{ p.fecha_creacion }}</td>
+                                                        <td>{{p.usuario}} ({{p.area}})</td>
+                                                        <td> {% if p.responsable == none %} SIN ASIGNAR {% else %} {{p.responsable}} {% endif %}  </td>
+                                                        <td>{{p.estado}}</td>
+                                                        <td>{{p.titulo}} </td>
+                                                        <td class="actions">
+                                                            <a href="{% url 'administradores:asignar' p.id %}"  class="btn btn-secondary btn-sm"><span class="icon-checkmark"></span></a>
+                                                        </td>
+                                                        <td class="actions">
+                                                            <a href="{% url 'administradores:modificar_ticket' p.id %}"  class="btn btn-secondary btn-sm"><span class="icon-pencil"></span></a>
+                                                        </td>
+                                                        <td class="actions">
+                                                            <a href="{% url 'administradores:detalles' p.id %}" type="button" class="btn btn-secondary btn-sm"><span class="icon-eye"></span></a>
+                                                        </td>
+                                                    </tr>
+                                            {% endfor %}
+                                            {% for p in solicitudes2 %} 
+                                                    <tr>
+                                                        <td >{{p.id}}</td>
+                                                        <td >{{ p.fecha_creacion }}</td>
+                                                        <td >{{p.usuario}} ({{p.area}})</td>
+                                                        <td > {% if p.responsable == none %} SIN ASIGNAR {% else %} {{p.responsable}} {% endif %}  </td>
+                                                        <td >{{p.estado}}</td>
+                                                        <td >{{p.titulo}} </td>
+                                                        <td class="actions">
+                                                            <a href="{% url 'administradores:asignar' p.id %}"  class="btn btn-danger btn-sm">Atender</a>
+                                                        </td>
+                                                        <td class="actions">
+                                                            <a href="{% url 'administradores:modificar_ticket' p.id %}"  class="btn btn-danger btn-sm">Modificar</a>
+                                                        </td>
+                                                        <td class="actions">
+                                                            <a href="{% url 'administradores:detalles' p.id %}" type="button" class="btn btn-danger btn-sm">Detalles</a>
+                                                        </td>
+                                                    </tr>
+                                            {% endfor %} 
+                                        </tbody>
+                                    </table>
+                                    
+                                </div>
+                            </div>
+                            <div  class="card-footer">
+                                        <div  class="legend d-flex justify-content-center">
+                                          
+                                        </div>
+                                    </div>
+                        </div>
+                    </div>
+                </div>
+            
+            
+
+            </div>
+        </div>
+        
+
+    </div>
+    
+
+</main>
+
+{% endblock %}
+

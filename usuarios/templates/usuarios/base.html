@@ -1,0 +1,241 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+    <!-- Font Awesome -->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js" integrity="sha256-VBLiveTKyUZMEzJd6z2mhfxIqz3ZATCuVMawPZGzIfA=" crossorigin="anonymous"></script>
+
+    <!-- Tempus Dominus Bootstrap 4 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css" integrity="sha256-XPTBwC3SBoWHSmKasAk01c08M6sIA5gF5+sRxqak2Qs=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js" integrity="sha256-z0oKYg6xiLq3yJGsp/LsY9XykbweQlHl42jHv2XTBz4=" crossorigin="anonymous"></script>
+    <!--<link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
+    -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    <link rel="stylesheet" href='{% static "index.css" %}'>
+    <link rel="stylesheet" type="text/css" href='{% static "style.css" %}'>
+
+  <title>Soporte Tecnico</title>
+
+ 
+</head>
+
+
+<body class='body-collapsed'>
+<!----------------------------------------------menu lateral------------------------------------------------------------------------------------------
+--->
+  
+  <div id="sidemenu" class="menu-collapsed">
+    
+    
+    <div id="header">
+    
+      <div class="sidebar-brand">
+        <a id="title" href="#"> FreeTransfer</a>
+        <div id="menu--btn" class="ml-auto mr-auto">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+      
+    </div>
+
+    
+   
+
+    <div id="profile">
+      <div id="photo"><img src="{% static 'images/foto_user.jpg' %}" alt=""></div>
+      <div id=name><span>{{user.username}}</span></div>
+      
+    </div>  
+
+
+    
+    <div id="menu-items">
+
+       <div class="item">
+        <a href="{% url 'home' %}">
+          <div class="icon">
+            <img src="{% static 'iconos/hogar.png' %}"></div>
+          <div class="title"><span>HOME</span></div>
+        </a>
+        </div>
+ 
+      <div class="item">
+        <a href="#">
+          <div class="icon">
+                 <img src="{% static 'iconos/billete.png' %}"></div>
+                <div class="title"><span>Tu dinero</span></div>
+                
+            </a>
+      </div>
+
+      <div class="item">
+        <a href="#">
+          <div class="icon">
+            <img src="{% static 'iconos/anadir.png' %}"></div>
+          <div class="title"><span>Tu actividad</span></div>
+        </a>
+      </div>
+     
+
+      
+      <div class="item">
+       <a href="#">
+          <div class="icon"><img src="{% static 'iconos/lista.png' %}"></div>
+          <div class="title"><span>Transferir</span></div>
+        </a>
+      </div>
+      <div class="item">
+        <a href="#">
+          <div class="icon">
+            <img src="{% static 'iconos/identificacion.png' %}"></div>
+          <div class="title"><span>Cerrar Sesion</span></div>
+        </a>
+      </div>
+      
+         
+    </div>
+  </div>
+<!--  aca termine el menu lateral ----------------------------------------------------------------------->
+<!-- header de la pagina principal ---------------------------------------------------------------------->
+  
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">FreeTransfer</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'home' %}">Home</a>
+      </li>
+      <li class="nav-item">
+        <a href="#">
+      </li>
+      <li class="nav-item">
+        <a href="#">
+      </li>
+      <li class="nav-item">
+        <a href="#">
+      </li>
+      <li class="nav-item">
+       <a href="#">
+      </li>
+     
+    </ul>
+      <div class="nav-item dropdown pr-2 pl-5">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{user.username}}
+        </a>
+        <div class="dropdown-menu bg-dark text-light" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item text-light " href="#">EDITAR PERFIL</a>
+          <a class="dropdown-item text-light" href="#">CAMBIAR CONTRASEÑA</a>
+          <div class="dropdown-divider text-light "></div>
+           <a class="dropdown-item text-light" href="#">SALIR</a>
+        </div>
+      </div>
+  </div>
+</nav>
+
+
+
+
+
+
+
+<!---
+  <div id="main-container">
+    <section class="header">
+        <nav class="navbar navbar-expand-lg ">
+          <form class="form-inline my-4 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+         
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ml-auto mr-5 mt-2  mt-lg-0">
+                
+                <li class="nav-item dropdown ml-auto">
+                  <a id="userlink" class="nav-link dropdown-toggle my-6 my-lg-0 " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{user.username}}
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">EDITAR PERFIL</a>
+                    <a class="dropdown-item" href="#">CAMBIAR CONTRASEÑA</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">SALIR</a>
+                  
+                </li>
+              </ul>
+          </div>
+        
+
+          
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                  <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+                </li>
+                
+                <li class="nav-item">
+                  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+          
+        </nav>
+    </section>
+  </div>
+   aca termine el header ----------------------------------------------------------------------->
+
+
+
+
+  
+  {% block contenido %}
+        
+  {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+  <script>
+    const btn = document.querySelector('#menu--btn');
+    const menu = document.querySelector('#sidemenu');
+    btn.addEventListener('click', e => {
+      menu.classList.toggle("menu-expanded");
+      menu.classList.toggle("menu-collapsed");
+
+      document.querySelector('body').classList.toggle('body-expanded');
+    });
+  </script>
+</body>
+</html>
