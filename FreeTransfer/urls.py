@@ -17,18 +17,29 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include  # Asegúrate de importar 'include'
+from django.urls import path
+from django.contrib.auth.views import LogoutView
 from . import views
+from .forms import RegistroForm  # Esta es la importación correcta
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
+    path('accounts/login/registro/', views.registro, name='registro'),
+    path('accounts/',include('django.contrib.auth.urls')),
+    path('logout/', LogoutView.as_view(), name='logout'),
+    path('tudinero', views.tudinero, name='tudinero'),
+    path('tuactividad', views.tuactividad, name='tuactividad'),
 
-    
-    # URLS DE APLICACIONES
-    path('usuarios/', include('usuarios.urls')), 
-    
+    # URLs de Aplicaciones
 
+    path('realizar_transferencia/', views.realizar_transferencia, name='realizar_transferencia'),
+    path('realizar_transferencia/ingresar_monto_transferencia/', views.ingresar_monto_transferencia, name='ingresar_monto_transferencia'),
+    path('realizar_transferencia/ingresar_monto_transferencia/confirmacion', views.confirmacion, name='confirmar_transferencia'),  # Página de confirmación
+    path('confirmacion/', views.confirmacion, name='confirmacion'),
+    path('ingresar_dinero/', views.ingresar_dinero, name='ingresar_dinero'),
+    path('ingresar_dinero/confirmacion', views.confirmacion, name='ingresar_dinero'),
 
 ]
 

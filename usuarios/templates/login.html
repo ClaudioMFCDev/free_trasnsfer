@@ -1,0 +1,56 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block contenido %}
+
+<section id="loguin" class="login">
+	<div class="container-lg">
+      <div id="tabla" class="row">
+
+        <div class="col-sm-12 col-xl-12 mb-12 align-items-stretch">
+          
+        	<div class="form-row justify-content-center">
+          <div class="card h-100 border-0 rounded-0">
+            <div class="card-title d-flex">
+
+            </div>
+            <div class="card-body">
+              
+			<div class="form-group border rounded">
+				<div class="col-lg-4 mx-auto">
+					<img src="{% static 'images/user.svg' %}" width="50" height="50" alt="">
+				</div>
+				<h2 class="text-center my-3">Ingresar</h2>
+				{{ form.errors }}
+				<form method="POST">{% csrf_token %}
+					<div class="col-12">
+						{{ form.username|as_crispy_field }}
+					</div>
+					<div class="col-12 form-group">
+						{{ form.password|as_crispy_field }}
+					</div>
+					<p>Si no tenés una cuenta <a class="text-dark" href="{% url 'usuarios:registrar' %}">Registrate</a></p>
+					<p>¿olvidaste la contraseña? <a class="text-dark" href="#">Recuperala aquí</a></p>
+					<div class="col-xl-8 ml-5 mr-5 pl-5 pr-5 ">
+						
+						<button type="submit" class="btn btn-dark" value="Ingresar" name="">Ingresar</button>
+					</div>
+				
+
+				</form>
+			</div>
+		</div>
+            </div>
+          </div>
+        </div>
+      
+
+
+
+
+
+
+		
+	</div>
+</section>
+{% endblock %}

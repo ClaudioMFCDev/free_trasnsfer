@@ -3,21 +3,37 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from .models import Usuario, Transferencia, MotivoTransferencia
 from django.contrib.auth.forms import UserCreationForm
+from usuarios.models import Usuario
 
 
 
+from django.shortcuts import render, redirect
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+from .forms import RegistroForm
 
 
-def registro(request):
+def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegistroForm(request.POST, request.FILES)
         if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('dashboard')
+            # Obtén los datos del formulario
+            password = form.cleaned_data['password1']
+            user = form.save(commit=False)  # No guarda el usuario todavía
+
+            # Encripta la contraseña
+            user.set_password(password)  # Este método encripta la contraseña
+            user.save()  # Guarda el usuario
+
+            return redirect('login')  # Redirige a la página de login
     else:
-        form = UserCreationForm()
-    return render(request, 'usuarios/registro.html', {'form': form})
+        form = RegistroForm()
+
+    return render(request, 'registro.html', {'form': form})
+
+
+
 
 def iniciar_sesion(request):
     if request.method == 'POST':
@@ -32,37 +48,38 @@ def iniciar_sesion(request):
     
     return render(request, 'usuarios/login.html', {'form': form})
 
-@login_required
-def dashboard(request):
-    saldo = request.user.saldo
-    transferencias = Transferencia.objects.filter(usuario_origen=request.user).order_by('-fecha')
-    return render(request, 'usuarios/dashboard.html', {'saldo': saldo, 'transferencias': transferencias})
 
-@login_required
-def transferencia(request):
-    if request.method == 'POST':
-        usuario_destino = request.POST.get('usuario_destino')
-        motivo = request.POST.get('motivo')
-        monto = request.POST.get('monto')
-        
-        # Implementa la lógica para realizar la transferencia aquí
-        
-    motivos = MotivoTransferencia.objects.all()
-    return render(request, 'usuarios/transferencia.html', {'motivos': motivos})
+# views.py
+from django.shortcuts import render, redirect
+from .forms import TransferenciaForm
+from .models import Transferencia, Usuario
+from django import forms
 
-@login_required
+
+def tudinero(request):
+    # Obtener el importe de la sesión, si está disponible
+    importe = request.session.get('importe', 0)
+    return render(request, 'tu_dinero.html', {'importe': importe})
+
+def tuactividad(request):
+    
+    return render(request, 'tu_actividad.html')
+
+
 def ingresar_dinero(request):
-    # Lógica para ingresar dinero
-    pass
-
-@login_required
-def listado_usuarios(request):
-    if request.user.es_admin:
-        usuarios = Usuario.objects.all()
-        return render(request, 'usuarios/listado_usuarios.html', {'usuarios': usuarios})
-    else:
-        return redirect('dashboard')
+        
+    return render(request, 'ingresar_dinero.html')
 
 
+def realizar_transferencia(request):
+    
+    return render(request, 'transferencia.html')
+
+def ingresar_monto_transferencia(request):
+        
+    return render(request, 'monto_tranferencia.html')
 
 
+def confirmacion(request):
+    # Tu lógica para manejar la transferencia
+    return render(request, 'confirmacion.html')

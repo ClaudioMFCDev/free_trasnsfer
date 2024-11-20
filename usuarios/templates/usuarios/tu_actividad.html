@@ -1,37 +1,7 @@
 {% extends 'base.html' %}
-
-{% block contenido1 %}
-<p>Tickets</p>
-
-{% endblock %}
-
-
+{% load crispy_forms_tags %}
 {% block contenido %}
-                        <!-- COMIENZO DEL SECTOR DE TARJETAS DE CANTIDAD-->
 
-
-<main class="container-body">
-  <div id="contenido" class="pages-container-fluid pt-2 pb-2 pl-5 pr-5">
-    <div class="col-12 col-xl-12 mb-4 align-items-stretch">
-      <!-- Mensaje de bienvenida con el nombre del usuario o "invitado" si no está logueado -->
-      <h4>Bienvenido, {% if user.is_authenticated %}{{ user.username }}{% else %}invitado{% endif %}!</h4>
-      
-      <!-- Información de la tarjeta -->
-      <div class="card">
-        <h5 class="card-header">Dinero disponible</h5>
-        <div class="card-body">
-          <h5 class="card-title">$ 1.450.098,00</h5>
-          
-          <!-- Botones para acciones -->
-          <!--<button type="button" class="btn btn-light">Ingresar Dinero</button>
-          <button type="button" class="btn btn-light" onclick="window.location.href='#' %}'">Transferir Dinero</button>-->
-          <a class="btn btn-light" href="#" role="button">Ingresar Dinero</a>
-          <a class="btn btn-light" href="#" role="button">Transferir Dinero</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</main>
 
 
 
@@ -152,7 +122,6 @@
     </div>
     
 
-</main>
 
 {% endblock %}
 

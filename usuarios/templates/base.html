@@ -30,7 +30,7 @@
     <link rel="stylesheet" href='{% static "index.css" %}'>
     <link rel="stylesheet" type="text/css" href='{% static "style.css" %}'>
 
-  <title>Soporte Tecnico</title>
+  <title>FreeTransfer</title>
 
  
 </head>
@@ -76,7 +76,7 @@
         </div>
  
       <div class="item">
-        
+        <a href="{% url 'tudinero' %}">
           <div class="icon">
                  <img src="{% static 'iconos/billete.png' %}"></div>
                 <div class="title"><span>Tu dinero</span></div>
@@ -85,7 +85,7 @@
       </div>
 
       <div class="item">
-        
+        <a href="{% url 'tuactividad' %}">
           <div class="icon">
             <img src="{% static 'iconos/anadir.png' %}"></div>
           <div class="title"><span>Tu actividad</span></div>
@@ -95,13 +95,13 @@
 
       
       <div class="item">
-       
+       <a href="#">
           <div class="icon"><img src="{% static 'iconos/lista.png' %}"></div>
           <div class="title"><span>Transferir</span></div>
         </a>
       </div>
       <div class="item">
-        
+        <a href="#">
           <div class="icon">
             <img src="{% static 'iconos/identificacion.png' %}"></div>
           <div class="title"><span>Cerrar Sesion</span></div>
@@ -147,7 +147,12 @@
           <a class="dropdown-item text-light " href="#">EDITAR PERFIL</a>
           <a class="dropdown-item text-light" href="#">CAMBIAR CONTRASEÑA</a>
           <div class="dropdown-divider text-light "></div>
-           <a class="dropdown-item text-light" href="#">SALIR</a>
+           <form method="post" action="{% url 'logout' %}">
+              {% csrf_token %}
+              <input type="hidden" name="next" value="{% url 'login' %}">
+              <button type="submit">Cerrar sesión</button>
+          </form>
+
         </div>
       </div>
   </div>

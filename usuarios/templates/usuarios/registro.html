@@ -1,6 +1,73 @@
-<h2>Registro</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Registrar</button>
-</form>
+{% load widget_tweaks %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <!-- Incluir Bootstrap desde un CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="d-flex justify-content-center align-items-center vh-100 bg-light text-dark">
+    <main class="w-100" style="max-width: 400px;">
+        <form method="post" enctype="multipart/form-data" class="bg-white p-4 rounded shadow text-dark">
+            {% csrf_token %}
+            
+            <!-- Logo y encabezado -->
+            <div class="text-center">
+                <img class="mb-4" src="{% static 'images/logo1.png' %}" alt="Logo" width="150" height="120">
+                <h1 class="h5 mb-3 fw-normal">Crea una cuenta</h1>
+            </div>
+            
+            <!-- Campos del formulario -->
+            <div class="form-floating mb-3">
+                {{ form.username|attr:"class:form-control bg-light text-dark" }}
+                <label for="id_username" class="small">Usuario</label>
+            </div>
+            <div class="form-floating mb-3">
+                {{ form.email|attr:"class:form-control bg-light text-dark" }}
+                <label for="id_email" class="small">Correo electrónico</label>
+            </div>
+            <div class="form-floating mb-3">
+                {{ form.password1|attr:"class:form-control bg-light text-dark" }}
+                <label for="id_password1" class="small">Contraseña</label>
+            </div>
+            <div class="form-floating mb-3">
+                {{ form.password2|attr:"class:form-control bg-light text-dark" }}
+                <label for="id_password2" class="small">Confirmar contraseña</label>
+            </div>
+
+            <!-- Campo para foto de perfil -->
+            <div class="mb-3">
+                <label for="id_profile_picture" class="small">Foto de perfil</label>
+                {{ form.profile_picture|attr:"class:form-control bg-light text-dark" }}
+            </div>
+
+            <!-- Campo para saldo inicial -->
+            <div class="form-floating mb-3">
+                {{ form.saldo_inicial|attr:"class:form-control bg-light text-dark" }}
+                <label for="id_saldo_inicial" class="small">Saldo inicial</label>
+            </div>
+            
+            <!-- Botón para enviar -->
+            <button class="btn btn-primary w-100 py-2" type="submit">Registrarse</button>
+        </form>
+
+        <!-- Mostrar errores -->
+        {% if form.errors %}
+            <div class="alert alert-danger mt-3 small">
+                {{ form.errors }}
+            </div>
+        {% endif %}
+
+        <!-- Enlace para volver al login -->
+        <div class="text-center mt-3">
+            <p class="small">¿Ya tienes cuenta? <a href="{% url 'login' %}" class="text-primary">Inicia sesión aquí</a></p>
+        </div>
+    </main>
+
+    <!-- Scripts de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
