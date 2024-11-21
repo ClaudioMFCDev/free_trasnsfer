@@ -20,7 +20,7 @@ from django.urls import path, include  # Asegúrate de importar 'include'
 from django.urls import path
 from django.contrib.auth.views import LogoutView
 from . import views
-from .forms import RegistroForm  # Esta es la importación correcta
+from .forms import FormUser  # Esta es la importación correcta
 
 
 urlpatterns = [

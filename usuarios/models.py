@@ -5,7 +5,7 @@ from django.db import models
 
 from django.db import models
 
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager  # Asegúrate de importar BaseUserManager
+from django.contrib.auth.models import AbstractUser, BaseUserManager  # Asegúrate de importar BaseUserManager
 from django.db import models
 
 class Solicitud(models.Model):
@@ -19,42 +19,48 @@ class Solicitud(models.Model):
 
 
 
-class UsuarioManager(BaseUserManager):
-    def create_user(self, username, email, password=None, **extra_fields):
-        if not email:
-            raise ValueError('El usuario debe tener un correo electrónico')
-        email = self.normalize_email(email)
-        user = self.model(username=username, email=email, **extra_fields)
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
+# class UsuarioManager(BaseUserManager):
+#     def create_user(self, username, email, password=None, **extra_fields):
+#         if not email:
+#             raise ValueError('El usuario debe tener un correo electrónico')
+#         email = self.normalize_email(email)
+#         user = self.model(username=username, email=email, **extra_fields)
+#         user.set_password(password)
+#         user.save(using=self._db)
+#         return user
 
-    def create_superuser(self, username, email, password=None, **extra_fields):
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
-        return self.create_user(username, email, password, **extra_fields)
+#     def create_superuser(self, username, email, password=None, **extra_fields):
+#         extra_fields.setdefault('is_staff', True)
+#         extra_fields.setdefault('is_superuser', True)
+#         return self.create_user(username, email, password, **extra_fields)
 
-class Usuario(AbstractBaseUser):
-    username = models.CharField(max_length=150, unique=True)
-    email = models.EmailField(unique=True)
-    password = models.CharField(max_length=255)
-    saldo = models.DecimalField(max_digits=10, decimal_places=2)
-    foto_perfil = models.ImageField(upload_to='fotos_perfil/', null=True, blank=True)
+# class Usuario(AbstractBaseUser):
+#     username = models.CharField(max_length=150, unique=True)
+#     email = models.EmailField(unique=True)
+#     password = models.CharField(max_length=255)
+#     saldo = models.DecimalField(max_digits=10, decimal_places=2)
+#     foto_perfil = models.ImageField(upload_to='fotos_perfil/', null=True, blank=True)
     
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
+#     is_active = models.BooleanField(default=True)
+#     is_staff = models.BooleanField(default=False)
     
-    # Definir el manager
-    objects = UsuarioManager()
+#     # Definir el manager
+#     objects = UsuarioManager()
 
-    # Campos requeridos para la creación de un usuario
-    REQUIRED_FIELDS = ['email', 'saldo', 'foto_perfil']
+#     # Campos requeridos para la creación de un usuario
+#     REQUIRED_FIELDS = ['email', 'saldo', 'foto_perfil']
     
-    USERNAME_FIELD = 'username'  # Especifica qué campo es el principal para el login
+#     USERNAME_FIELD = 'username'  # Especifica qué campo es el principal para el login
 
+#     def __str__(self):
+#         return self.username
+
+class Usuario(AbstractUser):
+    dni = models.IntegerField(null=True)
+    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
+    
     def __str__(self):
-        return self.username
-
+        return f"{self.id} -- {self.username}  --  {self.first_name} --  {self.last_name}"
 
 
 class Transferencia(models.Model):

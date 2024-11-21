@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.views.generic import TemplateView
 from django.contrib.auth import logout
-from .forms import RegistroForm
+from .forms import FormUser
 
 # Vista para el home del usuario registrado
 @login_required
@@ -29,7 +29,7 @@ def home(request):
 
 def registro(request):
     if request.method == 'POST':
-        form = RegistroForm(request.POST, request.FILES)
+        form = FormUser(request.POST, request.FILES)
         if form.is_valid():
             # Obtén los datos del formulario
             password = form.cleaned_data['password1']
@@ -41,7 +41,7 @@ def registro(request):
 
             return redirect('login')  # Redirige a la página de login
     else:
-        form = RegistroForm()
+        form = FormUser()
 
     return render(request, 'usuarios/registro.html', {'form': form})
 

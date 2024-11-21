@@ -1,3 +1,4 @@
+
 {% load widget_tweaks %}
 {% load static %}
 <!DOCTYPE html>
@@ -37,18 +38,12 @@
                 {{ form.password2|attr:"class:form-control bg-light text-dark" }}
                 <label for="id_password2" class="small">Confirmar contraseña</label>
             </div>
-
-            <!-- Campo para foto de perfil -->
-            <div class="mb-3">
-                <label for="id_profile_picture" class="small">Foto de perfil</label>
-                {{ form.profile_picture|attr:"class:form-control bg-light text-dark" }}
-            </div>
-
-            <!-- Campo para saldo inicial -->
             <div class="form-floating mb-3">
-                {{ form.saldo_inicial|attr:"class:form-control bg-light text-dark" }}
-                <label for="id_saldo_inicial" class="small">Saldo inicial</label>
+                {{ form.dni|attr:"class:form-control bg-light text-dark" }}
+                <label for="dni" class="small">dni</label>
             </div>
+
+
             
             <!-- Botón para enviar -->
             <button class="btn btn-primary w-100 py-2" type="submit">Registrarse</button>

@@ -11,12 +11,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from .forms import RegistroForm
+from .forms import FormUser
 
 
 def register(request):
     if request.method == 'POST':
-        form = RegistroForm(request.POST, request.FILES)
+        form = FormUser(request.POST, request.FILES)
         if form.is_valid():
             # Obtén los datos del formulario
             password = form.cleaned_data['password1']
@@ -28,7 +28,7 @@ def register(request):
 
             return redirect('login')  # Redirige a la página de login
     else:
-        form = RegistroForm()
+        form = FormUser()
 
     return render(request, 'registro.html', {'form': form})
 
