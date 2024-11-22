@@ -15,32 +15,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+# FreeTransfer/urls.py
 from django.contrib import admin
-from django.urls import path, include  # Asegúrate de importar 'include'
-from django.urls import path
+from django.urls import path, include
 from django.contrib.auth.views import LogoutView
 from . import views
-from .forms import FormUser  # Esta es la importación correcta
-
+from django.contrib.auth import views as views_django
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('accounts/login/registro/', views.registro, name='registro'),
-    path('accounts/',include('django.contrib.auth.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('logout/', LogoutView.as_view(), name='logout'),
-    path('tudinero', views.tudinero, name='tudinero'),
-    path('tuactividad', views.tuactividad, name='tuactividad'),
 
-    # URLs de Aplicaciones
 
-    path('realizar_transferencia/', views.realizar_transferencia, name='realizar_transferencia'),
-    path('realizar_transferencia/ingresar_monto_transferencia/', views.ingresar_monto_transferencia, name='ingresar_monto_transferencia'),
-    path('realizar_transferencia/ingresar_monto_transferencia/confirmacion', views.confirmacion, name='confirmar_transferencia'),  # Página de confirmación
-    path('confirmacion/', views.confirmacion, name='confirmacion'),
-    path('ingresar_dinero/', views.ingresar_dinero, name='ingresar_dinero'),
-    path('ingresar_dinero/confirmacion', views.confirmacion, name='ingresar_dinero'),
 
+    # Incluir las rutas de la app transacciones
+    path('transacciones/', include('transacciones.urls')),
 ]
 
 

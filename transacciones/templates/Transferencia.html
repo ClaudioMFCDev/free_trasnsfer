@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block contenido %}
+<main class="container-body">
+  <h2>Realizar Transferencia</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-primary">Transferir</button>
+  </form>
+</main>
+{% endblock %}
+

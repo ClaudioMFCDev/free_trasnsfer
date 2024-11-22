@@ -14,6 +14,9 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django.views.generic import TemplateView
 from django.contrib.auth import logout
 from .forms import FormUser
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
 
 # Vista para el home del usuario registrado
 @login_required
@@ -49,31 +52,4 @@ def registro(request):
 
 
 
-def tudinero(request):
-    # Obtener el importe de la sesión, si está disponible
-    importe = request.session.get('importe', 0)
-    return render(request, 'usuarios/tu_dinero.html', {'importe': importe})
 
-
-def tuactividad(request):
-    
-    return render(request, 'usuarios/tu_actividad.html')
-
-
-def ingresar_dinero(request):
-        
-    return render(request, 'usuarios/ingresar_dinero.html')
-
-
-def realizar_transferencia(request):
-    
-    return render(request, 'usuarios/tranferencia.html')
-
-def ingresar_monto_transferencia(request):
-        
-    return render(request, 'usuarios/monto_tranferencia.html')
-
-
-def confirmacion(request):
-    # Tu lógica para manejar la transferencia
-    return render(request, 'usuarios/confirmacion.html')

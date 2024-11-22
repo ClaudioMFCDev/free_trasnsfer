@@ -19,6 +19,7 @@ urlpatterns = [
     path('confirmacion/', views.confirmacion, name='confirmacion'),
     path('tudinero', views.tudinero, name='tudinero'),
     path('tuactividad', views.tuactividad, name='tuactividad'),
+    path('login/', views_django.LoginView.as_view(template_name="login.html"), name='login'),
 
 ]
 

@@ -46,8 +46,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'usuarios',
+    'transacciones',
     'crispy_forms',
     'widget_tweaks',
+    'crispy_bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -95,9 +97,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'freetransfer',  # Nombre de tu base de datos
         'USER': 'postgres',    # Usuario de PostgreSQL
-        'PASSWORD': 'p1p1p2p2',  # Contraseña del usuario
+        'PASSWORD': '12345',  # Contraseña del usuario
         'HOST': 'localhost',  # O la IP de tu servidor de PostgreSQL
-        'PORT': '5432',  # Puerto de PostgreSQL, 5432 por defecto
+        'PORT': '5433',  # Puerto de PostgreSQL, 5432 por defecto
     }
 }
 
@@ -119,6 +121,11 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+]
+
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 
@@ -149,7 +156,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-# Default primary key field type
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

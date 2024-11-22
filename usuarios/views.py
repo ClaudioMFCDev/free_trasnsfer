@@ -35,18 +35,39 @@ def register(request):
 
 
 
+from django.contrib.auth import authenticate, login as login_django
+from django.shortcuts import render, redirect
+
 def iniciar_sesion(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            # Inicia la sesión del usuario
-            user = form.get_user()
-            login(request, user)
-            return redirect('dashboard')  # Redirige a la página del dashboard
-    else:
-        form = AuthenticationForm()
-    
-    return render(request, 'usuarios/login.html', {'form': form})
+    se_autentico = False
+    salio_mal = False
+    mensaje_error = ""
+    username = ""
+
+    if request.method == "POST":
+        username = request.POST.get("username", default=None)
+        password = request.POST.get("password", default=None)
+        usuario = authenticate(request, username=username, password=password)
+
+        se_autentico = True
+
+        if usuario:
+            salio_mal = False
+            login_django(request, usuario)
+            return redirect("home")
+        else:
+            salio_mal = True
+            mensaje_error = "Credenciales incorrectas. Por favor, verifica tus datos."
+
+    ctx = {
+        "se_autentico": se_autentico,
+        "salio_mal": salio_mal,
+        "mensaje_error": mensaje_error,
+        "username": username,
+    }
+
+    return render(request, 'login.html', ctx)
+
 
 
 # views.py
