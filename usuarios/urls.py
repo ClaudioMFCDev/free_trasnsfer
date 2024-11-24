@@ -19,6 +19,8 @@ urlpatterns = [
     path('tuactividad', views.tuactividad, name='tuactividad'),
     # path('login/', views_django.LoginView.as_view(template_name="login.html"), name='login'),
     path('favoritos/', views.Listar.as_view(), name='favoritos'),
+    # eliminar fav
+    path('eliminar_favorito/<int:usuario_favorito_id>/', views.eliminar_favorito, name='eliminar_favorito'),
     # detalle vacuna
     path('usuario/<int:pk>/', views.UsuarioPerfil.as_view(), name='perfil'),
     path('perfil/editar/', EditarPerfilView.as_view(), name='editar_perfil'),

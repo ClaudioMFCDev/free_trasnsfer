@@ -19,7 +19,8 @@ from .forms import EditarPerfilForm, EditarPerfil
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib import messages
+
+
 
 
 
@@ -252,3 +253,17 @@ def agregar_favorito(request, cuenta_destino_id):
 
     return redirect(request.META.get('HTTP_REFERER', '/'))  # Cambia esta URL según la lista de movimientos
 
+
+
+@login_required
+def eliminar_favorito(request, usuario_favorito_id):
+    # Obtener el favorito a eliminar
+    favorito = get_object_or_404(UsuarioFavorito, usuario_favorito_id=usuario_favorito_id, usuario_origen=request.user)
+
+    # Eliminar el usuario favorito
+    favorito.delete()
+
+    messages.success(request, "El usuario ha sido eliminado de tu lista de favoritos.")
+    
+    # Redirigir de vuelta a la lista de favoritos
+    return redirect('usuarios:favoritos')  # Asegúrate de que esta URL sea correcta
