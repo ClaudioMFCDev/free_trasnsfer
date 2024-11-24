@@ -15,6 +15,7 @@ from django.views.generic import TemplateView
 from django.contrib.auth import logout
 from .forms import FormUser
 from django.contrib.auth import get_user_model
+from transacciones.models import Cuenta, MotivoTransferencia, Movimiento
 User = get_user_model()
 
 
@@ -22,8 +23,12 @@ User = get_user_model()
 @login_required
 def home(request):
     # Obtener el importe de la sesión, si está disponible
+    context={}
     importe = request.session.get('importe', 0)
-    return render(request, 'usuarios/home.html', {'importe': importe})
+    cuenta = Cuenta.objects.get(usuario=request.user)
+    context['monto']=cuenta.saldo
+
+    return render(request, 'usuarios/home.html', context)
 
 #def exit(request):
  #	loguot(request)
@@ -38,15 +43,20 @@ def registro(request):
             password = form.cleaned_data['password1']
             user = form.save(commit=False)  # No guarda el usuario todavía
 
-            # Encripta la contraseña
-            user.set_password(password)  # Este método encripta la contraseña
-            user.save()  # Guarda el usuario
+            # Encripta la contraseña y activa el usuario
+            user.set_password(password)
+            user.is_active = True  
+            user.save()  # Guarda el usuario en la base de datos
+
+            # Ahora que el usuario tiene un ID, crea la cuenta asociada
+            Cuenta.objects.create(usuario=user, saldo=0)  # Puedes establecer un saldo inicial si lo deseas
 
             return redirect('login')  # Redirige a la página de login
     else:
         form = FormUser()
 
     return render(request, 'usuarios/registro.html', {'form': form})
+
 
 
 

@@ -18,3 +18,8 @@ class TransferenciaForm(forms.Form):
         empty_label="Seleccione un motivo"
     )
 
+class ModificacionMotivo(forms.ModelForm):
+
+	class Meta:
+		model = MotivoTransferencia
+		fields = ['nombre']

@@ -7,22 +7,18 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db import models
 from django.conf import settings
+from usuarios.models import Usuario, MotivoTransferencia
 
 
 
 class Cuenta(models.Model):
-    usuario = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     saldo = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    usuario= models.OneToOneField(Usuario, related_name = 'usuariocuenta', on_delete=models.CASCADE,null=True, blank=True)
+
 
     def __str__(self):
         return f"{self.usuario.username} - ${self.saldo}"
 
-
-class MotivoTransferencia(models.Model):
-    nombre = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.nombre
 
 class Movimiento(models.Model):
     TIPO_MOVIMIENTO = [
@@ -47,5 +43,7 @@ class Movimiento(models.Model):
 
     def __str__(self):
         return f"{self.tipo} - {self.monto} ({self.cuenta_origen} -> {self.cuenta_destino})"
+
+
 
 

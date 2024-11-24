@@ -1,19 +1,16 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from .models import Usuario, Transferencia, MotivoTransferencia
 from django.contrib.auth.forms import UserCreationForm
-from django.views.generic import TemplateView, UpdateView, DetailView
-from django import forms
+from usuarios.models import Usuario
+
+
+
+from django.shortcuts import render, redirect
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from django.contrib.auth import authenticate, login as login_django
-
-from .models import UsuarioFavorito, Usuario, Transferencia, MotivoTransferencia
 from .forms import FormUser
-
-from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic.edit import UpdateView
-from .forms import EditarPerfilForm
-
 
 
 def register(request):
@@ -97,57 +94,3 @@ def ingresar_monto_transferencia(request):
 def confirmacion(request):
     # Tu lógica para manejar la transferencia
     return render(request, 'confirmacion.html')
-
-
-# @login_required
-class Listar(TemplateView):
-    template_name = 'usuarios/favoritos.html'
-    # model = UsuarioFavorito
-    context_object_name = "usuario"
-    # paginate_by = 5
-
-    def get_context_data(self, **kwargs):
-        ctx = super().get_context_data(**kwargs)
-
-        # Obtener el usuario actual basado en el pk de la URL
-        # usuario_origen_id = self.kwargs.get('pk')
-        # usuario = get_object_or_404(Usuario, id=usuario_origen_id)
-        usuario = self.request.user
-
-        # Filtrar favoritos para este usuario
-        ctx['favoritos'] = UsuarioFavorito.objects.filter(usuario_origen=usuario)
-        ctx["titulo"] = "LISTA DE FAVORITOS"
-        return ctx
-
-
-class UsuarioPerfil(DetailView):
-    model = Usuario
-    template_name = 'usuarios/perfil.html'
-    context_object_name = 'usuario'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['usuario'] = Usuario.objects.filter(id=self.object.id)
-        return context
-
-
-
-
-class EditarPerfilView(LoginRequiredMixin, UpdateView):
-    model = Usuario
-    form_class = EditarPerfilForm
-    template_name = 'usuarios/editar_perfil.html'
-    def get_success_url(self):
-        # Redirige al perfil del usuario logueado
-        return reverse_lazy('usuarios:perfil', kwargs={'pk': self.request.user.pk})
-
-    def get_object(self, queryset=None):
-        print("Usuario que edita:", self.request.user)  # Depuración
-
-        # Retorna el usuario logueado para que edite su propio perfil
-        return self.request.user
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        print("Formulario generado:", context.get("form"))
-        return context

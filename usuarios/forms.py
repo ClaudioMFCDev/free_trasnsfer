@@ -35,7 +35,7 @@ class FormUser(UserCreationForm):
     username = forms.CharField(label="Nombre de usuario", widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese un nombre de usuario'}))
     class Meta:
         model = Usuario
-        fields = ["username", "first_name", "last_name", "email", "is_active", "dni"]
+        fields = ["username", "first_name", "last_name", "email", "dni"]
     
     def __init__(self, *args, **kwargs):
         super(FormUser, self).__init__(*args, **kwargs)
@@ -63,3 +63,17 @@ class EditarPerfilForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Correo'}),
             'avatar': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }
+        
+        
+class EditarPerfil(forms.ModelForm):
+
+    class Meta:
+        model = Usuario
+        fields = ['username','email','dni','avatar','is_active']
+
+class ActivarUsuario(forms.ModelForm):
+
+    class Meta:
+        model = Usuario
+        fields = ['username','is_active']
+

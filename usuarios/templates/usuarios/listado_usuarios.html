@@ -1,0 +1,98 @@
+
+						<!-- COMIENZO DEL SECTOR DE TARJETAS DE CANTIDAD-->
+{% extends 'base.html' %}
+
+{% block contenido1 %}
+
+
+{% endblock %}
+
+{% block contenido %}
+
+
+<main class="container-body">
+  <div id="contenido" class="pages-container-fluid pt-2 pb-2 pl-5 pr-5">
+    <div class="col-12 col-xl-12 mb-4 align-items-stretch">
+      <!-- Mensaje de bienvenida con el nombre del usuario o "invitado" si no está logueado -->
+      <h4>Bienvenido,{% if user.is_authenticated %}{{ user.username }}{% else %}invitado{% endif %}!</h4>
+      
+      <!-- Información de la tarjeta -->
+      <div class="card">
+        
+        <div class="card-body">
+         
+        	<div id="tabla" class="row">
+
+				<div _ngcontent-c4="" class="col-12 col-xl-12 mb-4 align-items-stretch">
+					<div _ngcontent-c4="" class="card h-100 border-0 rounded-0">
+						<div _ngcontent-c4="" class="card-title mb-1 p-3 d-flex">
+							<h5 class="card-header">LISTADO DE usuarios </h5> 
+							<a _ngcontent-c4="" class="btn ml-auto p-0 text-lightning">
+								<i _ngcontent-c4="" class="fas fa-ellipsis-h"></i>
+							</a>
+						</div>
+						<div _ngcontent-c4="" class="card-body">
+							<div _ngcontent-c4="" class="table-responsive-md">
+								<div _ngcontent-c4="" class="table-responsive">
+									<table _ngcontent-c4="" class="table ">
+										<thead _ngcontent-c4="">
+											<tr _ngcontent-c4="">
+												
+												<th _ngcontent-c4="" style="width:10%;">ID</th>
+												<th _ngcontent-c4="" style="width:20%;">NOMBRE</th>
+												<th _ngcontent-c4="" class="actions" style="width:5%;"></th>
+												<th _ngcontent-c4="" class="actions" style="width:5%;"></th>
+												
+											</tr>
+										</thead>
+										<tbody _ngcontent-c4="" class="no-border-x">
+											{% for p in usuarios%} 
+													<tr _ngcontent-c4="">
+														<td _ngcontent-c4="">{{p.id}}</td>
+														<td _ngcontent-c4="" class="number">{{ p.username }}</td>
+														<td>
+														 {% if p.is_active %}
+															<td _ngcontent-c4="" class="actions">
+															<a href="{% url 'usuarios:activar_usuario' p.id %}" type="button" class="btn btn-danger btn-sm">Desactivar</a></td>
+														{% else %}
+															<td _ngcontent-c4="" class="actions">
+															<a href="{% url 'usuarios:activar_usuario' p.id %}" type="button" class="btn btn-danger btn-sm">Activar</a></td>
+														{% endif %}
+														
+														<td _ngcontent-c4="" class="actions">
+															<a href="{% url 'usuarios:editar_perfil' p.id %}" type="button" class="btn btn-danger btn-sm">EDITAR</a>
+														</td>
+														<td _ngcontent-c4="" class="actions">
+															<a href="{% url 'usuarios:eliminar_usuario' p.id %}" type="button" class="btn btn-danger btn-sm">ELIMINAR</a>
+														</td>
+														<td _ngcontent-c4="" class="actions">
+															<a href="{% url 'usuarios:movimiento_por_usuario' p.id %}" type="button" class="btn btn-danger btn-sm">MOVIMIENTOS</a>
+														</td>
+														</td>
+
+
+														
+													</tr>
+											{% endfor %} 
+										</tbody>
+									</table>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+
+
+			</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+			
+
+{% endblock %}
+

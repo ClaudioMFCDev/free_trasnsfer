@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'FreeTransfer.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'freetransfer',  # Nombre de tu base de datos
+        'NAME': 'freetransfer1',  # Nombre de tu base de datos
         'USER': 'postgres',    # Usuario de PostgreSQL
         'PASSWORD': 'p1p1p2p2',  # Contraseña del usuario
         'HOST': 'localhost',  # O la IP de tu servidor de PostgreSQL
@@ -144,9 +144,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 STATIC_URL = '/static/'
 
-# Si tienes archivos estáticos en una carpeta personalizada, agrega esta línea:
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
