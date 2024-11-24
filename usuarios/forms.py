@@ -3,6 +3,9 @@ from django import forms
 from .models import Transferencia
 from django.contrib.auth.forms import UserCreationForm
 from .models import Usuario
+from django import forms
+from django.core.exceptions import ValidationError
+
 
 class TransferenciaForm(forms.ModelForm):
     class Meta:
@@ -26,9 +29,6 @@ class IngresoDineroForm(forms.Form):
     )
 
 
-from django import forms
-
-from django.core.exceptions import ValidationError
 
 class FormUser(UserCreationForm):
     
@@ -53,3 +53,13 @@ class FormUser(UserCreationForm):
         return dni
 
 
+class EditarPerfilForm(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ['first_name', 'last_name', 'email', 'avatar']  # Solo los campos que deseas permitir editar
+        widgets = {
+            'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Apellido'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Correo'}),
+            'avatar': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+        }

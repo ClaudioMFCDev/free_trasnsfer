@@ -30,7 +30,7 @@
     <link rel="stylesheet" href='{% static "index.css" %}'>
     <link rel="stylesheet" type="text/css" href='{% static "style.css" %}'>
 
-  <title>FreeTransfer</title>
+  <title>Soporte Tecnico</title>
 
  
 </head>
@@ -55,8 +55,6 @@
     </div>
 
     
-   
-
     <div id="profile">
       <div id="photo"><img src="{% static 'images/foto_user.jpg' %}" alt=""></div>
       <div id=name><span>{{user.username}}</span></div>
@@ -64,11 +62,10 @@
     </div>  
 
 
-    
     <div id="menu-items">
 
        <div class="item">
-        <a href="#">
+        <a href="{% url 'home' %}">
           <div class="icon">
             <img src="{% static 'iconos/hogar.png' %}"></div>
           <div class="title"><span>HOME</span></div>
@@ -76,7 +73,7 @@
         </div>
  
       <div class="item">
-        <a href="#">
+        
           <div class="icon">
                  <img src="{% static 'iconos/billete.png' %}"></div>
                 <div class="title"><span>Tu dinero</span></div>
@@ -85,7 +82,7 @@
       </div>
 
       <div class="item">
-        <a href="listar_movimientos">
+        
           <div class="icon">
             <img src="{% static 'iconos/anadir.png' %}"></div>
           <div class="title"><span>Tu actividad</span></div>
@@ -95,13 +92,13 @@
 
       
       <div class="item">
-       <a href="#">
+       
           <div class="icon"><img src="{% static 'iconos/lista.png' %}"></div>
           <div class="title"><span>Transferir</span></div>
         </a>
       </div>
       <div class="item">
-        <a href="#">
+        
           <div class="icon">
             <img src="{% static 'iconos/identificacion.png' %}"></div>
           <div class="title"><span>Cerrar Sesion</span></div>
@@ -112,7 +109,6 @@
     </div>
   </div>
 <!--  aca termine el menu lateral ----------------------------------------------------------------------->
-
 <!-- header de la pagina principal ---------------------------------------------------------------------->
   
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -145,21 +141,10 @@
           {{user.username}}
         </a>
         <div class="dropdown-menu bg-dark text-light" aria-labelledby="navbarDropdown">
-          <img 
-            src="{% if user.avatar %}{{ user.avatar.url }}{% else %}{% static 'user_default.png' %}{% endif %}" 
-            class="rounded-circle img-fluid" 
-            style="width: 80px; height: 80px; object-fit: cover;" 
-            alt="User Image">
-
-          <a class="dropdown-item text-light " href="{% url 'usuarios:perfil' user.id %}">VER PERFIL</a>
+          <a class="dropdown-item text-light " href="#">EDITAR PERFIL</a>
+          <a class="dropdown-item text-light" href="#">CAMBIAR CONTRASEÑA</a>
           <div class="dropdown-divider text-light "></div>
-
-           <form method="post" action="{% url 'logout' %}">
-              {% csrf_token %}
-              <input type="hidden" name="next" value="{% url 'login' %}">
-              <button type="submit">Cerrar sesión</button>
-          </form>
-
+           <a class="dropdown-item text-light" href="#">SALIR</a>
         </div>
       </div>
   </div>
@@ -167,72 +152,58 @@
 
 
 
+{% block contenido %}
+  <!-- COMIENZO DEL SECTOR DE TABLA DE FAVORITOS  -->
 
+  <div id="contenido"  class="pages-container-fluid pt-2 pb-2 pl-5 pr-5">
 
-
-
-<!---
-  <div id="main-container">
-    <section class="header">
-        <nav class="navbar navbar-expand-lg ">
-          <form class="form-inline my-4 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
-         
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav ml-auto mr-5 mt-2  mt-lg-0">
-                
-                <li class="nav-item dropdown ml-auto">
-                  <a id="userlink" class="nav-link dropdown-toggle my-6 my-lg-0 " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{user.username}}
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">EDITAR PERFIL</a>
-                    <a class="dropdown-item" href="#">CAMBIAR CONTRASEÑA</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">SALIR</a>
-                  
-                </li>
-              </ul>
-          </div>
-        
-
-          
-                <li class="nav-item active">
-                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                  <li class="nav-item">
-                  <a class="nav-link" href="#">Link</a>
-                </li>
-                
-                <li class="nav-item">
-                  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li>
-          
-        </nav>
-    </section>
+    <div class="col-12 col-xl-12 mb-4 align-items-stretch">
+        <div class="card h-100 border-0 rounded">
+            <div class="card-title mb-1">                                 
+            
+                <div class="table-responsive-md">
+                    <div _ngcontent-c4="" class="table-responsive">
+                        <table _ngcontent-c4="" class="table ">
+                            <thead _ngcontent-c4="">
+                                <tr _ngcontent-c4="">
+                                    <th _ngcontent-c4="" style="width:5%;">NOMBRE</th>
+                                    <th _ngcontent-c4="" style="width:16%;">APELLIDO</th>
+                                    <th _ngcontent-c4="" class="actions" style="width:3%;"></th>
+                                    <th _ngcontent-c4="" class="actions" style="width:3%;"></th>
+                                    <th _ngcontent-c4="" class="actions" style="width:3%;"></th>
+                                </tr>
+                            </thead>
+                            <tbody _ngcontent-c4="" class="no-border-x">
+                              {% for fav in favoritos %}
+                                  <tr _ngcontent-c4="">
+                                      <td>{{ fav.usuario_favorito.first_name|capfirst }}</td>
+                                      <td>{{ fav.usuario_favorito.last_name|capfirst }}</td>
+                                      <td class="actions">
+                                          <a href=""  class="btn btn-secondary btn-sm"><span class="icon-checkmark"></span></a>
+                                      </td>
+                                      <td class="actions">
+                                          <a href=""  class="btn btn-secondary btn-sm"><span class="icon-pencil"></span></a>
+                                      </td>
+                                      <td class="actions">
+                                          <a href="" type="button" class="btn btn-secondary btn-sm"><span class="icon-eye"></span></a>
+                                      </td>
+                                  </tr>
+                              {% endfor %}
+                            </tbody>
+                        </table>
+                        
+                    </div>
+                </div>
+                <div  class="card-footer">
+                  <div  class="legend d-flex justify-content-center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
   </div>
-   aca termine el header ----------------------------------------------------------------------->
-
-
-
+{% endblock %}
 
   
-  {% block contenido %}
-        
-  {% endblock %}
-
-
-
-
-
-
-
-
-
-
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

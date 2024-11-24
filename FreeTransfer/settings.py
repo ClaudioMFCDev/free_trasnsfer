@@ -97,9 +97,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'freetransfer',  # Nombre de tu base de datos
         'USER': 'postgres',    # Usuario de PostgreSQL
-        'PASSWORD': '12345',  # Contraseña del usuario
+        'PASSWORD': 'p1p1p2p2',  # Contraseña del usuario
         'HOST': 'localhost',  # O la IP de tu servidor de PostgreSQL
-        'PORT': '5433',  # Puerto de PostgreSQL, 5432 por defecto
+        'PORT': '5432',  # Puerto de PostgreSQL, 5432 por defecto
     }
 }
 
