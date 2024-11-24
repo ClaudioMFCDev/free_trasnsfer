@@ -2,7 +2,8 @@
 from django.urls import path
 
 from . import views
-from .views import UsuarioDeleteView
+from .views import UsuarioDeleteView, EditarPerfilView
+
 
 app_name = 'usuarios'
 
@@ -20,7 +21,7 @@ urlpatterns = [
     path('favoritos/', views.Listar.as_view(), name='favoritos'),
     # detalle vacuna
     path('usuario/<int:pk>/', views.UsuarioPerfil.as_view(), name='perfil'),
-    #path('perfil/editar/', EditarPerfilView.as_view(), name='editar_perfil'),
+    path('perfil/editar/', EditarPerfilView.as_view(), name='editar_perfil'),
 
     path('eliminar/<int:pk>/',UsuarioDeleteView.as_view(), name='eliminar_usuario'),
     path('listado_usuarios/', views.listar_usuarios,name='listado_usuarios'),
@@ -28,7 +29,7 @@ urlpatterns = [
     path('usuariodenegadp/', views.Listar_MovimientosPorUsuario, name='usuariodenegadp'),
 
     #path('editar_perfil/<str:pk>', views.EditarPerfil_clase.as_view(template_name= "editarperfil.html"), name='editar_perfil' ),
-    path('editar_perfil/<str:pk>/', views.EditarPerfil_clase.as_view(), name='editar_perfil'),
+    # path('editar_perfil/<str:pk>/', views.EditarPerfil_clase.as_view(), name='editar_perfil'),
     path('activar_usuario/<str:pk>/', views.activar_usuario.as_view(), name='activar_usuario'),
     
 

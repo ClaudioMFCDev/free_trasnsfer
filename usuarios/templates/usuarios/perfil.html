@@ -173,25 +173,30 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th style="width: 20px">Nombre</th>
+                                            <th >Nombre</th>
                                             <th>Apellido</th>
                                             <th>Email</th>
-                                            <th style="width: 150px">Opciones</th>
+                                            <th style="width: 50px">Opciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 
                                         <tr class="align-middle" id="">
-                                            <td  class="text-center">{{ user.first_name }}</td>
-                                            <td>{{ user.last_name }} </td>
-                                            <td>{{ user.email }} </td>
+                                            <td  class="text-center">{% if user.first_name %} {{ user.first_name }}
+                                               {% else %} - - - - - {% endif %}</td>
+                                            <td  class="text-center">{% if user.last_name %} {{ user.last_name }}
+                                                {% else %} - - - - - {% endif %}</td>
+                                            <td  class="text-center">{% if user.email %} {{ user.email }}
+                                                {% else %} - - - - - {% endif %}</td>    
                                             <td  class="text-center">
                                                 <a href="{% url 'usuarios:editar_perfil' %}" class="btn btn-sm btn-warning" title="Editar">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
+                                                {% if user.is_staff %}
                                                 <a href="" class="btn btn-sm btn-danger" title="Eliminar">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </a>
+                                                {% endif %}
                                             </td>
                                         </tr>
 

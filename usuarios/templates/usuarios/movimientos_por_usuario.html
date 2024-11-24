@@ -16,7 +16,7 @@
   <div id="contenido" class="pages-container-fluid pt-2 pb-2 pl-5 pr-5">
     <div class="col-12 col-xl-12 mb-4 align-items-stretch">
       <!-- Mensaje de bienvenida con el nombre del usuario o "invitado" si no está logueado -->
-      <h4>Bienvenido,{% if user.is_authenticated %}{{ user.username }}{% else %}invitado{% endif %}!</h4>
+      <h4>Bienvenido{% if user.is_authenticated %}{{ user.username }}{% else %}invitado{% endif %}!</h4>
       
       <!-- Información de la tarjeta -->
       <div class="card">

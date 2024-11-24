@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'FreeTransfer.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'freetransfer1',  # Nombre de tu base de datos
+        'NAME': 'freetransfer',  # Nombre de tu base de datos
         'USER': 'postgres',    # Usuario de PostgreSQL
         'PASSWORD': 'p1p1p2p2',  # Contraseña del usuario
         'HOST': 'localhost',  # O la IP de tu servidor de PostgreSQL

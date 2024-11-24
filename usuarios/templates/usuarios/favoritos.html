@@ -163,34 +163,39 @@
             
                 <div class="table-responsive-md">
                     <div _ngcontent-c4="" class="table-responsive">
-                        <table _ngcontent-c4="" class="table ">
-                            <thead _ngcontent-c4="">
-                                <tr _ngcontent-c4="">
-                                    <th _ngcontent-c4="" style="width:5%;">NOMBRE</th>
-                                    <th _ngcontent-c4="" style="width:16%;">APELLIDO</th>
-                                    <th _ngcontent-c4="" class="actions" style="width:3%;"></th>
-                                    <th _ngcontent-c4="" class="actions" style="width:3%;"></th>
-                                    <th _ngcontent-c4="" class="actions" style="width:3%;"></th>
+                      <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="width:5%;">NOMBRE</th>
+                                <th style="width:16%;">APELLIDO</th>
+                                <th class="actions" style="width:3%;">Transferir</th>
+                                <th class="actions" style="width:3%;">Eliminar</th>
+  
+                            </tr>
+                        </thead>
+                        <tbody class="no-border-x">
+                            {% if favoritos %}
+                                {% for fav in favoritos %}
+                                <tr>
+                                    <td>{{ fav.usuario_favorito.first_name|capfirst }}</td>
+                                    <td>{{ fav.usuario_favorito.last_name|capfirst }}</td>
+                                    <td class="actions">
+                                        <a href="{% url 'transacciones:realizar_transferencia' fav.usuario_favorito.username %}" class="btn btn-secondary btn-sm"><span class="icon-checkmark"></span></a>
+                                    </td>
+                                    <td class="actions">
+                                        <a href="" class="btn btn-secondary btn-sm"><span class="icon-pencil"></span></a>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody _ngcontent-c4="" class="no-border-x">
-                              {% for fav in favoritos %}
-                                  <tr _ngcontent-c4="">
-                                      <td>{{ fav.usuario_favorito.first_name|capfirst }}</td>
-                                      <td>{{ fav.usuario_favorito.last_name|capfirst }}</td>
-                                      <td class="actions">
-                                          <a href=""  class="btn btn-secondary btn-sm"><span class="icon-checkmark"></span></a>
-                                      </td>
-                                      <td class="actions">
-                                          <a href=""  class="btn btn-secondary btn-sm"><span class="icon-pencil"></span></a>
-                                      </td>
-                                      <td class="actions">
-                                          <a href="" type="button" class="btn btn-secondary btn-sm"><span class="icon-eye"></span></a>
-                                      </td>
-                                  </tr>
-                              {% endfor %}
-                            </tbody>
-                        </table>
+                                {% endfor %}
+                            {% else %}
+                            <tr>
+                                <!-- Espaciamos el mensaje para que abarque las columnas -->
+                                <td colspan="5" class="text-center text-muted" style="font-size: 1.5rem; font-weight: bold;">No posee usuarios favoritos</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                    
                         
                     </div>
                 </div>

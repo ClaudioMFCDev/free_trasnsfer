@@ -80,7 +80,7 @@ def ingresar_dinero(request):
 
 
 @login_required
-def realizar_transferencia(request):
+def realizar_transferencia(request, destinatario_username=None):
     if request.method == 'POST':
         form = TransferenciaForm(request.POST)
         if form.is_valid():
@@ -124,7 +124,9 @@ def realizar_transferencia(request):
                 
                 
     else:
-        form = TransferenciaForm()
+        # Si se recibe un destinatario por URL, prefijar el formulario
+        initial_data = {'destinatario': destinatario_username} if destinatario_username else {}
+        form = TransferenciaForm(initial=initial_data)
 
     return render(request, 'Transferencia.html', {'form': form})
 

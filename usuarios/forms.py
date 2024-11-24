@@ -71,9 +71,18 @@ class EditarPerfil(forms.ModelForm):
         model = Usuario
         fields = ['username','email','dni','avatar','is_active']
 
+
+
 class ActivarUsuario(forms.ModelForm):
 
     class Meta:
         model = Usuario
         fields = ['username','is_active']
 
+
+
+class EditarPerfil(forms.ModelForm):
+
+    class Meta:
+        model = Usuario
+        fields = ['username','email','dni','avatar','is_active']
