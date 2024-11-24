@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block contenido1 %}
+<p>Tickets</p>
+
+{% endblock %}
+
+
+{% block contenido %}
+            <!-- COMIENZO DEL SECTOR DE TARJETAS DE CANTIDAD-->
+
+            
+           
+
+
+<main class="container-body">
+  <div id="contenido" class="pages-container-fluid pt-4 pb-4 pl-4 pr-4">
+    <div>
+      <h4>vista administrador: Modificar Motivo</h4>
+      <div id="tarjetas" class="row">
+        
+
+      </div>
+
+
+            <!-- COMIENZO DEL SECTOR DE TABLA DE TICKETS  -->
+
+
+<div id="contenido"  class="pages-container-fluid pt-2 pb-2 pl-5 pr-5">
+
+  <div class="col-12 col-xl-12 mb-4 align-items-stretch">
+
+    <div class="card h-100 border-0 rounded">
+
+      <div id="tabla" class="row">
+
+        <div _ngcontent-c4="" class="col-sm-12 col-xl-8 mb-4 align-items-stretch">
+          
+      
+      <div _ngcontent-c4="" class="col-sm-12 col-xl-4 mb-4 align-items-stretch">
+          
+            <div _ngcontent-c4="" class="card-title mb-1 p-3 d-flex">
+              <h4>Editar Perfil:</h4>
+              <a _ngcontent-c4="" class="btn ml-auto p-0 text-lightning">
+                <i _ngcontent-c4="" class="fas fa-ellipsis-h"></i>
+              </a>
+            </div>
+            <div _ngcontent-c4="" class="card-body">
+                <div>
+                      
+                    {{form.errors}}
+                    <form method="POST">{% csrf_token %}
+                 
+                      <div class="col-lg-12 col-sm-12 mr-auto my-3">
+                          {{form.username|as_crispy_field}}
+                      </div>
+                      <div class="col-lg-12 col-sm-12 mr-auto my-3">
+                          {{form.email|as_crispy_field}}
+                      </div>
+                      <div class="col-lg-12 col-sm-12 mr-auto my-3">
+                          {{form.dni|as_crispy_field}}
+                      </div>
+                       <div class="col-lg-12 col-sm-12 mr-auto my-3">
+                          {{form.avatar|as_crispy_field}}
+                      </div>
+            
+                      <input class="align-center" type="submit" value="Guardar">
+                    </form> 
+                </div>
+
+
+
+            </div>
+        
+        
+
+     
+      </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+  </div>
+  
+
+</main>
+ 
+
+{% endblock %}

@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from .models import Usuario, Transferencia, MotivoTransferencia
+from transacciones.models import Cuenta, Movimiento
 from django.contrib.auth.forms import UserCreationForm
-from usuarios.models import Usuario
+from .models import Usuario, MotivoTransferencia
+from transacciones.models import Cuenta
 
 
 
@@ -11,26 +13,14 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from .forms import FormUser
+from .forms import FormUser, EditarPerfil, ActivarUsuario
+from django.views.generic.edit import UpdateView
+from django.urls import reverse_lazy
+from django.views.generic.edit import DeleteView 
+from django.contrib.auth.decorators import user_passes_test
+from django.contrib import messages
 
 
-def register(request):
-    if request.method == 'POST':
-        form = FormUser(request.POST, request.FILES)
-        if form.is_valid():
-            # Obtén los datos del formulario
-            password = form.cleaned_data['password1']
-            user = form.save(commit=False)  # No guarda el usuario todavía
-
-            # Encripta la contraseña
-            user.set_password(password)  # Este método encripta la contraseña
-            user.save()  # Guarda el usuario
-
-            return redirect('login')  # Redirige a la página de login
-    else:
-        form = FormUser()
-
-    return render(request, 'registro.html', {'form': form})
 
 
 
@@ -104,3 +94,96 @@ def ingresar_monto_transferencia(request):
 def confirmacion(request):
     # Tu lógica para manejar la transferencia
     return render(request, 'confirmacion.html')
+
+#class EditarPerfil_clase(UpdateView):
+#    model = Usuario
+#    form_class = EditarPerfil
+#    template_name = 'usuarios/editarperfil.html'
+#    success_url = reverse_lazy('home')
+
+#    def form_valid(self, form):
+        
+#        perfil = form.save(commit = False)
+        
+#        perfil.save()
+
+ #       return redirect(self.success_url)
+def is_staff(user):
+    return user.is_staff
+
+class EditarPerfil_clase(UpdateView):
+    model = Usuario
+    form_class = EditarPerfil
+    template_name = 'usuarios/editarperfil.html'
+
+    def get_success_url(self):
+        # Verificar si el usuario es parte del personal (is_staff)
+        if self.request.user.is_staff:
+            return reverse_lazy('usuarios:listado_usuarios')  # Redirigir a listado de usuarios si es staff
+        else:
+            return reverse_lazy('home')  # Redirigir al home si no es staff
+
+    def form_valid(self, form):
+        perfil = form.save(commit=False)
+        
+        perfil.save()
+        return redirect(self.get_success_url())  # Usar el método get_success_url para redirigir
+
+class activar_usuario(UpdateView):
+    model = Usuario
+    form_class = ActivarUsuario
+    template_name = 'usuarios/activar_usuario.html'
+    success_url = reverse_lazy('usuarios:listado_usuarios')
+
+    # Redirigir al home si no es staff
+
+    def form_valid(self, form):
+        perfil = form.save(commit=False)
+        perfil.save()
+        return redirect(self.get_success_url())  # Usar el método get_success_url para redirigir
+
+class UsuarioDeleteView(DeleteView):
+    model = Usuario
+    template_name = 'usuarios/confirmacion_eliminar_usuario.html'
+    success_url = reverse_lazy('usuarios:listado_usuarios')  # Redirige tras eliminar
+
+def listar_usuarios(request):
+    if not request.user.is_staff:
+        messages.error(request, "No tienes permisos para acceder a esta página.")
+        return render(request, 'usuarios/denegado.html')
+    context={}
+    todos=Usuario.objects.all() #MotivoTransferencia.objects.all()
+    context['usuarios']=todos
+    return render(request,'usuarios/listado_usuarios.html', context)
+    if not request.user.is_staff:
+        messages.error(request, "No tienes permisos para acceder a esta página.")
+        return render(request, 'usuarios/denegado.html')
+
+
+
+#@user_passes_test(is_staff)
+def Listar_MovimientosPorUsuario(request, pk):
+    # Verificar si el usuario no es staff
+    if not request.user.is_staff:
+        messages.error(request, "No tienes permisos para acceder a esta página.")
+        return render(request, 'usuarios/denegado.html')
+    # Obtener el usuario directamente por el pk (ID del usuario)
+    usuario = Usuario.objects.get(pk=pk)
+    
+    # Obtener la cuenta del usuario
+    cuenta = Cuenta.objects.get(usuario=usuario)
+    
+    # Obtener los movimientos de la cuenta
+    movimientos = Movimiento.objects.filter(cuenta_origen=cuenta) | Movimiento.objects.filter(cuenta_destino=cuenta)
+    
+    # Pasar los movimientos a la plantilla
+    context = {
+        'usuario': usuario,
+        'movimientos': movimientos
+    }
+    
+    return render(request, 'usuarios/movimientos_por_usuario.html', context)
+
+
+
+

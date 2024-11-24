@@ -8,6 +8,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager  # Asegúrate de importar BaseUserManager
 from django.db import models
 
+
+
 class Solicitud(models.Model):
     titulo = models.CharField(max_length=100)
     descripcion = models.TextField()
@@ -58,20 +60,33 @@ class Solicitud(models.Model):
 class Usuario(AbstractUser):
     dni = models.IntegerField(null=True)
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
+
     
     def __str__(self):
         return f"{self.id} -- {self.username}  --  {self.first_name} --  {self.last_name}"
 
 
+
+
+class MotivoTransferencia(models.Model):
+    nombre = models.CharField(max_length=100)
+    def __str__(self):
+            return self.nombre  
+
+
+
+
+
 class Transferencia(models.Model):
     usuario_origen = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='transferencias_realizadas')
     usuario_destino = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='transferencias_recibidas')
-    motivo = models.CharField(max_length=100)
+    motivo = models.ForeignKey(MotivoTransferencia,on_delete=models.CASCADE)
     monto = models.DecimalField(max_digits=10, decimal_places=2)
     fecha = models.DateTimeField(auto_now_add=True)
 
 
 
-class MotivoTransferencia(models.Model):
-    nombre = models.CharField(max_length=100)
+
+
+
     

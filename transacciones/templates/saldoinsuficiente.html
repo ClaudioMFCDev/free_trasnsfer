@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<main class="container-body">
+  <div id="contenido" class="pages-container-fluid pt-4 pb-4 pl-4 pr-4">
+    <div class="row">
+      <div class="col-md-12 mb-4">
+        <div class="card border-0 rounded-0 text-center">
+          <div class="card-body">
+            <h5 class="card-title">Saldo insuficiente</h5>
+            <p class="card-text">Intente de nuevo por favor.</p>
+            <a href="{% url 'transacciones:realizar_transferencia' %}" class="btn btn-primary">Volver a intentar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

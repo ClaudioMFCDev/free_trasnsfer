@@ -40,11 +40,9 @@
 										<thead _ngcontent-c4="">
 											<tr _ngcontent-c4="">
 												
-												<th _ngcontent-c4="" style="width:10%;">FECHA</th>
-												<th _ngcontent-c4="" style="width:20%;">HORA</th>
-												<th _ngcontent-c4="" style="width:10%;">USUARIO</th>
+												<th _ngcontent-c4="" style="width:10%;">FECHA y HORA</th>
+												
 												<th _ngcontent-c4="" style="width:15%;">TIPO DE OPERACION</th>
-												<th _ngcontent-c4="" style="width:15%;">Monto</th>
 												<th _ngcontent-c4="" class="actions" style="width:5%;"></th>
 												<th _ngcontent-c4="" class="actions" style="width:5%;"></th>
 												
@@ -54,10 +52,23 @@
 											{% for p in movimientos%} 
 													<tr _ngcontent-c4="">
 														<td _ngcontent-c4="">{{p.fecha}}</td>
-														<td _ngcontent-c4="" class="number">{{ p.hora }}</td>
-														<td _ngcontent-c4="">{{p.usuario}}</td>
-														<td _ngcontent-c4="" class="text-success">{{p.tipo}}</td>
-														<td _ngcontent-c4="" class="text-success">{{p.monto}} </td>
+														
+														{% if p.tipo == "ingreso" %}
+														
+														    <td _ngcontent-c4="" class="text-success">ingresaste: ${{p.monto}}</td>
+															<td _ngcontent-c4="" class="text-success"> </td>
+														{% elif p.tipo == "transferencia" %}
+														
+														    <td _ngcontent-c4="" class="text-success">transferiste a
+														    {{p.cuenta_destino.usuario.username}}: ${{p.monto}}</td>
+														    <td _ngcontent-c4="" class="text-success"> </td>
+														{% elif p.tipo == "ingreso transferencia"%}
+														
+														    <td _ngcontent-c4="" class="text-success">recibiste de {{p.cuenta_origen.usuario.username}}: ${{p.monto}} </td>
+														    <td _ngcontent-c4="" class="text-success"> </td>
+														{% endif %}
+														
+														
 														<td _ngcontent-c4="" class="actions">
 															<a href="#" type="button" class="btn btn-danger btn-sm">Detalles</a>
 														</td>
