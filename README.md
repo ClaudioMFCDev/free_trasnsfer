@@ -16,5 +16,5 @@ Este proyecto es una aplicación desarrollada en Django que permite a los usuari
 ### 1. Clonar el repositorio
 Primero, clona el repositorio desde GitHub:
 ```bash
-git clone https://github.com/usuario/proyecto-django.git
+git clone https://github.com/ClaudioMFCDev/app-free-transfer.git
 cd proyecto-django
