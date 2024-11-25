@@ -86,19 +86,11 @@ WSGI_APPLICATION = 'FreeTransfer.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'freetransfer',  # Nombre de tu base de datos
-#         'USER': 'postgres',    # Usuario de PostgreSQL
-#         'PASSWORD': 'p1p1p2p2',  # Contraseña del usuario
-#         'HOST': 'localhost',  # O la IP de tu servidor de PostgreSQL
-#         'PORT': '5432',  # Puerto de PostgreSQL, 5432 por defecto
-#     }
-# }
+# Configuración del proyecto
+SECRET_KEY = os.getenv('SECRET_KEY')
 
-
-
+if not SECRET_KEY:
+    raise ValueError("La SECRET_KEY no está definida en el archivo .env")
 
 # Configuración de la base de datos usando variables del .env
 DATABASES = {
