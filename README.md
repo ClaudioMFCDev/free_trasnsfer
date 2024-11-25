@@ -73,7 +73,7 @@ proyecto-django/
 ```
 
 ### 🧩 Funcionalidades Desarrolladas
-1. Gestión de Movimientos
+## 1. Gestión de Movimientos
 Listar movimientos de un usuario autenticado.
 Filtrar movimientos por fecha o tipo.
 2. Favoritos
