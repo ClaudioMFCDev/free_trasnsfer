@@ -14,6 +14,7 @@ Este proyecto es una aplicación web desarrollada con **Django** y **Python**, q
 ## 👥 Integrantes del Equipo
 
 - **Cintia Verón** (Full Stack Developer)
+ GitHub: [CintiaVeron](https://github.com/CintiaVeron)
 - **Claudio Castillo** (Full Stack Developer)
 
 ---
