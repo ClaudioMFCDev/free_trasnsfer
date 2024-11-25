@@ -1,6 +1,6 @@
 # Proyecto Django: Gestión de Movimientos de Usuarios
 
-Este proyecto es una aplicación desarrollada en Django que permite a los usuarios autenticados visualizar una lista de sus movimientos y agregar ciertos destinatarios como favoritos. Incluye funcionalidades clave relacionadas con la gestión de datos de usuarios, integración de base de datos y una interfaz de usuario amigable para interactuar con las operaciones del sistema.
+Este proyecto es una aplicación desarrollada en Django que permite a los usuarios registrados visualizar una lista de sus movimientos y agregar ciertos destinatarios como favoritos. Incluye funcionalidades clave relacionadas con la gestión de datos de usuarios, integración de base de datos y una interfaz de usuario amigable para interactuar con las operaciones del sistema.
 
 ---
 
