@@ -6,10 +6,8 @@ Este proyecto es una aplicación desarrollada en Django que permite a los usuari
 
 ## 👥 Integrantes del Equipo
 
-- **Juan Pérez** (Frontend Developer)
-- **María López** (Backend Developer)
-- **Luis García** (DevOps)
-- **Ana Martínez** (UI/UX Designer)
+- **Cintia Verón** (Full Stack Developer)
+- **Claudio Castillo** (Full Stack Developer)
 
 ---
 
