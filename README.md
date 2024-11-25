@@ -18,3 +18,6 @@ Primero, clona el repositorio desde GitHub:
 ```bash
 git clone https://github.com/ClaudioMFCDev/app-free-transfer.git
 cd proyecto-django
+```
+
+### 2. Crear y activar un entorno virtual
