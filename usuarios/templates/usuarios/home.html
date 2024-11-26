@@ -13,11 +13,11 @@
 <main class="container-body">
   <div id="contenido" class="pages-container-fluid pt-2 pb-2 pl-5 pr-5">
     <div class="col-12 col-xl-12 mb-4 align-items-stretch">
-      <h4>Bienvenido, {% if user.is_authenticated %}{{ user.username }}{% else %}invitado{% endif %}!</h4>
+      <h4>Bienvenido, {% if user.is_authenticated %}{{ user.first_name }}{% else %}Invitado{% endif %}!</h4>
       <div class="card">
         <h5 class="card-header">Dinero disponible</h5>
         <div class="card-body">
-          <h5 class="card-title">$ {{ monto }}</h5>
+          <h5 class="card-title">{% if monto > 0 %}$ {{ monto }}{% else %}No posee fondos{% endif %}</h5>
           <a class="btn btn-primary" href="{% url 'transacciones:ingresar_dinero' %}" role="button">Ingresar Dinero</a>
           <a class="btn btn-primary" href="{% url 'transacciones:realizar_transferencia' %}">Transferir Dinero</a>
         </div>

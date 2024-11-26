@@ -47,7 +47,7 @@
     
       <div class="sidebar-brand">
         <a id="title" href="#"> FreeTransfer</a>
-        <div id="menu--btn" class="ml-auto mr-auto">
+        <div id="menu--btn" class="">
           <i class="fas fa-bars"></i>
         </div>
       </div>
@@ -58,10 +58,44 @@
    
 
     <div id="profile">
-      <div id="photo"><img src="{% static 'images/foto_user.jpg' %}" alt=""></div>
-      <div id=name><span>{{user.username}}</span></div>
+      <div id="photo">
+        <img 
+        src="{% if user.avatar %}{{ user.avatar.url }}{% else %}{% static 'user_default.png' %}{% endif %}" 
+        class="rounded-circle img-fluid" 
+        style="width: 80px; height: 80px; object-fit: cover;" 
+        alt="User Image">
+      </div>
+      <div id=name><span>{{user.first_name}}</span></div>
       
-    </div>  
+    </div>
+    
+    <script>
+      // Selecciona los elementos necesarios
+      const sidemenu = document.getElementById('sidemenu');
+      const userImage = document.getElementById('user-image');
+    
+      // Función para ajustar el tamaño de la imagen
+      function adjustImageSize() {
+        if (sidemenu.classList.contains('menu-collapsed')) {
+          userImage.style.width = '30px';
+          userImage.style.height = '30px';
+        } else {
+          userImage.style.width = '80px';
+          userImage.style.height = '80px';
+        }
+      }
+    
+      // Llama a la función al cargar la página
+      adjustImageSize();
+    
+      // Configura un MutationObserver para detectar cambios en las clases
+      const observer = new MutationObserver(() => {
+        adjustImageSize(); // Llama a la función cuando cambie la clase
+      });
+    
+      // Observa cambios en los atributos del sidemenu
+      observer.observe(sidemenu, { attributes: true, attributeFilter: ['class'] });
+    </script>
 
 
     
@@ -71,7 +105,7 @@
         <a href="{% url 'home' %}">
           <div class="icon">
             <img src="{% static 'iconos/hogar.png' %}"></div>
-          <div class="title"><span>HOME</span></div>
+          <div class="title"><span>Home</span></div>
         </a>
         </div>
  
@@ -92,8 +126,6 @@
         </a>
       </div>
      
-
-      
       <div class="item">
        <a href="{% url 'transacciones:realizar_transferencia' %}">
           <div class="icon"><img src="{% static 'iconos/lista.png' %}"></div>
@@ -105,13 +137,13 @@
         <div class="item">
          <a href="{% url 'transacciones:listar_motivos' %}">
             <div class="icon"><img src="{% static 'iconos/lista.png' %}"></div>
-            <div class="title"><span>LISTAR MOTIVOS</span></div>
+            <div class="title"><span>Listar Motivos</span></div>
           </a>
         </div>
         <div class="item">
          <a href="{% url 'usuarios:listado_usuarios' %}">
             <div class="icon"><img src="{% static 'iconos/lista.png' %}"></div>
-            <div class="title"><span>LISTAR USUARIOS</span></div>
+            <div class="title"><span>Listar Usuarios</span></div>
           </a>
         </div>
         {% endif %}
@@ -156,25 +188,24 @@
      
     </ul>
       <div class="nav-item dropdown pr-2 pl-5">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{user.username}}
+        <a class="dropdown-toggle text-light " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{user.first_name}}
         </a>
         <div class="dropdown-menu bg-dark text-light" aria-labelledby="navbarDropdown">
           <img 
             src="{% if user.avatar %}{{ user.avatar.url }}{% else %}{% static 'user_default.png' %}{% endif %}" 
-            class="rounded-circle img-fluid" 
+            class="rounded-circle img-fluid ml-4" 
             style="width: 80px; height: 80px; object-fit: cover;" 
             alt="User Image">
 
           <a class="dropdown-item text-light " href="{% url 'usuarios:perfil' user.id %}">VER PERFIL</a>
-          <a class="dropdown-item text-light " href="{% url 'usuarios:editar_perfil' %}">Editar Perfil</a>
           <a class="dropdown-item text-light" href="#">CAMBIAR CONTRASEÑA</a>
           <div class="dropdown-divider text-light "></div>
 
            <form method="post" action="{% url 'logout' %}">
               {% csrf_token %}
               <input type="hidden" name="next" value="{% url 'login' %}">
-              <button type="submit">Cerrar sesión</button>
+              <button class="btn-primary ml-4 rounded" type="submit">Cerrar sesión</button>
           </form>
 
         </div>
